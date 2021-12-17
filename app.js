@@ -6,13 +6,15 @@
 5. Next / prev ==> Done
 6. Random ==> Done
 7. Next/ Repeat when ended ==>Done
-8. Active song
-9. Scroll active song into view
-10. Play song when click
+8. Active song ==> Done
+9. Scroll active song into view ==> Done
+10. Play song when click ==>Done
 */
 
 const $ = document.querySelector.bind(document)
 const $$ = document.querySelectorAll.bind(document)
+
+const PLAYER_STORAGE_KEY = 'MUSIC_PLAYER'
 
 const player = $('.player')
 const cd = $('.cd');
@@ -25,6 +27,7 @@ const prevBtn = $('.btn-prev')
 const nextBtn = $('.btn-next')
 const randomBtn = $('.btn-random')
 const repeatBtn = $('.btn-repeat')
+const playlist = $('.playlist')
 
 
 const app = {
@@ -32,6 +35,7 @@ const app = {
     isPlaying: false,
     isRandom: false,
     isRepeat: false,
+    config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
     songs: [
         {
             name: "Phố Mùa Đông",
@@ -94,11 +98,15 @@ const app = {
             image: "./Img/HAT10.jpg"
         }
     ],
+    setConfig: function(key, vaule){
+        this.config[key] = vaule
+        localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config))
+    },
 
     render: function () {
-        const htmls = this.songs.map(song => {
+        const htmls = this.songs.map((song, index) => {
             return `
-                <div class="song">
+                <div class="song ${index === this.currentIndex ? 'active' : ''}" data-index = "${index}">
                     <div class="thumb" style="background-image: url('${song.image}')">
                     </div>
                     <div class="body">
@@ -111,7 +119,7 @@ const app = {
                 </div>
             `
         })
-        $('.playlist').innerHTML = htmls.join('');
+        playlist.innerHTML = htmls.join('');
     },
 
     defineProperties: function(){
@@ -182,15 +190,6 @@ const app = {
             audio.currentTime = seekTime
         }
 
-        //Xử lý next Song 
-        nextBtn.onclick = function(){
-            if(_this.isRandom){
-                _this.playRandomSong()
-            }else{
-                _this.nextSong()
-            }
-            audio.play()
-        }
         //Xử lý prev Song
         prevBtn.onclick = function(){
             if(_this.isRandom){
@@ -199,17 +198,33 @@ const app = {
                 _this.prevSong();
             }
             audio.play();
+            _this.render();
+            _this.scrollToActiveSong()
+        }
+
+        //Xử lý next Song 
+        nextBtn.onclick = function(){
+            if(_this.isRandom){
+                _this.playRandomSong()
+            }else{
+                _this.nextSong()
+            }
+            audio.play()
+            _this.render();
+            _this.scrollToActiveSong()
         }
 
         //Xử lý khi bấm vào nút Random
         randomBtn.onclick = function(){
             _this.isRandom = !_this.isRandom
+            _this.setConfig('isRandom', _this.isRandom)
             randomBtn.classList.toggle('active', _this.isRandom);
         }
 
         //Xử lý khi bấm vào nút Repeat
         repeatBtn.onclick = function(){
             _this.isRepeat = !_this.isRepeat
+            _this.setConfig('isRepeat', _this.isRepeat)
             repeatBtn.classList.toggle('active', _this.isRepeat)
         }
 
@@ -221,12 +236,46 @@ const app = {
                 nextBtn.click();
             }
         }
+
+        //Lắng nghe hành vi click vào playlist
+        playlist.onclick = function(e){
+            const songNode = e.target.closest('.song:not(.active)')
+            if(songNode || e.target.closest('.option')){
+                //Xử lý khi click vào song
+                if(songNode){
+                    // console.log(songNode.dataset.index)
+                    _this.currentIndex = Number(songNode.dataset.index)
+                    _this.loadCurrentSong()
+                    _this.render()
+                    audio.play()
+                }
+                //Xử lý khi click vào song option
+                if(e.target.closest('.option')){
+    
+                }
+            }
+
+        }
+    },
+
+    scrollToActiveSong: function(){
+        setTimeout(() => {
+            $('.song.active').scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+            })
+        }, 300)
     },
 
     loadCurrentSong: function () {
         heading.textContent = this.currentSong.name;
         cdThumb.style.backgroundImage = `url(${this.currentSong.image})`
         audio.src = this.currentSong.path
+    },
+
+    loadConfig: function () {
+        this.isRandom = this.config.isRandom
+        this.isRepeat = this.config.isRepeat
     },
 
     nextSong: function(){
@@ -251,6 +300,9 @@ const app = {
     },
 
     start: function () {
+        //Gán cấu hình từ config vào ứng dụng
+        this.loadConfig();
+
         //Định nghĩa các thuộc tính cho Object
         this.defineProperties();
         
@@ -262,9 +314,30 @@ const app = {
 
         //Render Playlist
         this.render();
+
+        //Hiển thị trạng thái ban đầu cho button repeat & random
+        randomBtn.classList.toggle('active', this.isRandom);
+        repeatBtn.classList.toggle('active', this.isRepeat);
     }
 
 }
 
 app.start();
 
+/* **Lưu ý sửa một số bug trong app cần fix sau khi thi xong :D
+1. Tìm hiểu về lỗi GET http://127.0.0.1:5500/favicon.ico 404 (Not Found)
+mỗi khi vào chạy app ở mục console và fix.
+2. Tua nhạc thường bị lỗi phải bấm nhiều lần mới được
+3. Nút Repeat và nút Shuffle cùng active
+4. Shuffle chưa tối ưu, 
+nên đưa tất cả bài nhạc vào một mảng
+mỗi khi nó chạy thì lại remove nó ra cho đến
+khi mảng về rỗng thì reset quá trình
+5. Nên Css thêm cho prev và next Btn, sao cho khi bấm cảm giác được 
+rằng mình đã bấm vào
+6. Css Hover cho những nút
+7. Mỗi lần active cho các bài nhạc khác thường phải render lại
+8. Phần active nhạc thì sẽ scroll đến bài đó nhưng lại chưa tối ưu
+9. Xử lý click option những bài khác sẽ không nhận(dòng 253)
+9. Thêm các tính năng vào option 3 chấm 
+*/
