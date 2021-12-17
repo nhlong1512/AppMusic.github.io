@@ -40,7 +40,7 @@ const app = {
         {
             name: "Phố Mùa Đông",
             singer: "Hà Anh Tuấn",
-            path: "./Music/Song1.mp3",
+            path: "https://aredir.nixcdn.com/NhacCuaTui1006/PhoMuaDongSEESINGSHARE2-HaAnhTuan-5103249.mp3?st=B4FPud5jIDMh2_rYGSsR0A&e=1639839091&download=true",
             image: "./Img/HAT1.jpg"
         },
         {
