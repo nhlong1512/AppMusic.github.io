@@ -37,65 +37,125 @@ const app = {
     isRepeat: false,
     // config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
     songs: [
+        // {
+        //     name: "Phố Mùa Đông",
+        //     singer: "Hà Anh Tuấn",
+        //     path: "https://aredir.nixcdn.com/NhacCuaTui1006/PhoMuaDongSEESINGSHARE2-HaAnhTuan-5103249.mp3?st=B4FPud5jIDMh2_rYGSsR0A&e=1639839091&download=true",
+        //     image: "./Img/HAT1.jpg"
+        // },
+        // {
+        //     name: "LK Đà Lạt Hoàng Hôn - Bài Thánh Ca Buồn",
+        //     singer: "Hà Anh Tuấn",
+        //     path: "https://tainhac123.com/download/lk-da-lat-hoang-hon-bai-thanh-ca-buon-live-ha-anh-tuan.AB3jNVnHv4L5.html",
+        //     image: "./Img/HAT2.jpg"
+        // },
+        // {
+        //     name: "Người Tình Mùa Đông",
+        //     singer: "Hà Anh Tuấn",
+        //     path: "./Music/Song3.mp3",
+        //     image: "./Img/HAT3.jpg"
+        // },
+        // {
+        //     name: "Chuyện Của Mùa Đông",
+        //     singer: "Hà Anh Tuấn",
+        //     path: "./Music/Song4.mp3",
+        //     image: "./Img/HAT4.jpg"
+        // },
+        // {
+        //     name: "Phố Sương Mù",
+        //     singer: "Hà Anh Tuấn",
+        //     path: "./Music/Song5.mp3",
+        //     image: "./Img/HAT5.jpg"
+        // },
+        // {
+        //     name: "Xuân Thì",
+        //     singer: "Hà Anh Tuấn",
+        //     path: "./Music/Song6.mp3",
+        //     image: "./Img/HAT6.jpg"
+        // },
+        // {
+        //     name: "Chưa Bao Giờ",
+        //     singer: "Hà Anh Tuấn",
+        //     path: "./Music/Song7.mp3",
+        //     image: "./Img/HAT7.jpg"
+        // },
+        // {
+        //     name: "Đi Đâu Để Thấy Hoa Bay",
+        //     singer: "Hà Anh Tuấn",
+        //     path: "./Music/Song8.mp3",
+        //     image: "./Img/HAT8.jpg"
+        // },
+        // {
+        //     name: "Giấc Mơ Chỉ Là Giấc Mơ",
+        //     singer: "Hà Anh Tuấn",
+        //     path: "./Music/Song9.mp3",
+        //     image: "./Img/HAT9.jpg"
+        // },
+        // {
+        //     name: "Cơn Mưa Tình Yêu",
+        //     singer: "Hà Anh Tuấn",
+        //     path: "./Music/Song10.mp3",
+        //     image: "./Img/HAT10.jpg"
+        // }
         {
-            name: "Phố Mùa Đông",
-            singer: "Hà Anh Tuấn",
-            path: "https://aredir.nixcdn.com/NhacCuaTui1006/PhoMuaDongSEESINGSHARE2-HaAnhTuan-5103249.mp3?st=B4FPud5jIDMh2_rYGSsR0A&e=1639839091&download=true",
-            image: "./Img/HAT1.jpg"
+            name: "Bước Qua Nhau",
+            singer: "Vũ",
+            path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1024/BuocQuaNhau-Vu-7120388.mp3?st=I9W59X1Odyi9QRGTehWfHg&e=1638708688",
+            image: "https://avatar-nct.nixcdn.com/song/2021/11/19/6/d/9/1/1637317177185.jpg"
         },
         {
-            name: "LK Đà Lạt Hoàng Hôn - Bài Thánh Ca Buồn",
-            singer: "Hà Anh Tuấn",
-            path: "https://tainhac123.com/download/lk-da-lat-hoang-hon-bai-thanh-ca-buon-live-ha-anh-tuan.AB3jNVnHv4L5.html",
-            image: "./Img/HAT2.jpg"
+            name: "Ái Nộ",
+            singer: "Masew, Khôi Vũ",
+            path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1021/AiNo1-MasewKhoiVu-7078913.mp3?st=ngcoKLRyRorVu8KqUeS1wg&e=1638762705",
+            image: "https://avatar-nct.nixcdn.com/song/2021/08/30/2/1/a/e/1630316309035.jpg"
         },
         {
-            name: "Người Tình Mùa Đông",
-            singer: "Hà Anh Tuấn",
-            path: "./Music/Song3.mp3",
-            image: "./Img/HAT3.jpg"
+            name: "Muộn Rồi Mà Sao Còn",
+            singer: "Sơn Tùng M-TP",
+            path: "https://c1-ex-swe.nixcdn.com/Believe_Audio19/MuonRoiMaSaoCon-SonTungMTP-7011803.mp3?st=tD-Ln6qGqkdH659AeuHsjQ&e=1638782546",
+            image: "https://avatar-nct.nixcdn.com/song/2021/04/29/9/1/f/8/1619691182261.jpg"
         },
         {
-            name: "Chuyện Của Mùa Đông",
-            singer: "Hà Anh Tuấn",
-            path: "./Music/Song4.mp3",
-            image: "./Img/HAT4.jpg"
+            name: "Thức Giấc",
+            singer: "Da LAB",
+            path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1018/ThucGiac-DaLAB-7048212.mp3?st=1LcQhTisk8WrOQuzK4p86Q&e=1638782708",
+            image: "https://avatar-nct.nixcdn.com/song/2021/07/14/8/c/f/9/1626231010810.jpg"
         },
         {
-            name: "Phố Sương Mù",
-            singer: "Hà Anh Tuấn",
-            path: "./Music/Song5.mp3",
-            image: "./Img/HAT5.jpg"
+            name: "Độ Tộc 2",
+            singer: "Masew, Độ Mixi, Phúc Du, Pháo",
+            path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1020/DoToc2-MasewDoMixiPhucDuPhao-7064730.mp3?st=ehahZN3-iX9xYdBFgDgGcg&e=1638782785",
+            image: "https://avatar-nct.nixcdn.com/song/2021/08/10/b/2/e/0/1628579601228.jpg"
         },
         {
-            name: "Xuân Thì",
-            singer: "Hà Anh Tuấn",
-            path: "./Music/Song6.mp3",
-            image: "./Img/HAT6.jpg"
+            name: "Chúng Ta Sau Này",
+            singer: "T.R.I",
+            path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1010/ChungTaSauNay-TRI-6929586.mp3?st=l56Wr1fLE9fMnFehhpo5xg&e=1638782875",
+            image: "https://avatar-nct.nixcdn.com/song/2021/01/27/5/2/2/b/1611738358661.jpg"
         },
         {
-            name: "Chưa Bao Giờ",
-            singer: "Hà Anh Tuấn",
-            path: "./Music/Song7.mp3",
-            image: "./Img/HAT7.jpg"
+            name: "Dịu Dàng Em Đến",
+            singer: "ERIK, NinjaZ",
+            path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1021/DiuDangEmDen-ERIKNinjaZ-7078877.mp3?st=QmjyqbnGv3jClPKm4oA1YQ&e=1638782938",
+            image: "https://avatar-nct.nixcdn.com/song/2021/08/30/2/1/a/e/1630307726211.jpg"
         },
         {
-            name: "Đi Đâu Để Thấy Hoa Bay",
-            singer: "Hà Anh Tuấn",
-            path: "./Music/Song8.mp3",
-            image: "./Img/HAT8.jpg"
+            name: "Hương",
+            singer: "Văn Mai Hương, Negav",
+            path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1010/Huong-VanMaiHuongNegav-6927340.mp3?st=PvHOWlRnF6TymvggYGding&e=1638783027",
+            image: "https://avatar-nct.nixcdn.com/song/2021/01/22/9/f/2/1/1611280898757.jpg"
         },
         {
-            name: "Giấc Mơ Chỉ Là Giấc Mơ",
-            singer: "Hà Anh Tuấn",
-            path: "./Music/Song9.mp3",
-            image: "./Img/HAT9.jpg"
+            name: "Miên Man",
+            singer: "DUTZUX",
+            path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1024/MienMan-DUTZUX-7120884.mp3?st=yTOFq5aH8FGEvbm-_n_KTA&e=1638783090",
+            image: "https://avatar-nct.nixcdn.com/song/2021/11/19/6/d/9/1/1637320885751.jpg"
         },
         {
-            name: "Cơn Mưa Tình Yêu",
-            singer: "Hà Anh Tuấn",
-            path: "./Music/Song10.mp3",
-            image: "./Img/HAT10.jpg"
+            name: "có hẹn với thanh xuân",
+            singer: "MONSTAR",
+            path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1020/cohenvoithanhxuan-MONSTAR-7050201.mp3?st=PjrrnZ2dZ3ffA6R7dRrppQ&e=1638783161",
+            image: "https://avatar-nct.nixcdn.com/song/2021/07/16/f/4/9/8/1626425507034.jpg"
         }
     ],
     // setConfig: function(key, vaule){
